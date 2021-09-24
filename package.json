@@ -1,6 +1,6 @@
 {
   "name": "@ajoelp/express-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validation middleware for express",
   "source": "src/index.ts",
   "typings": "dist/index.d.ts",
