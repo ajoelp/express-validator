@@ -73,7 +73,8 @@ export const params = buildMiddleware('params')
 export const validationResponseMiddleware = (req: any, res: any, next: any) => {
     if(req.messageBag && Object.keys(req.messageBag).length > 0){
         return res.status(400).json({
-            error: 'Validation Error',
+            error: 'validation-error',
+            message: 'Validation Error',
             messages: req.messageBag
         })
     }
