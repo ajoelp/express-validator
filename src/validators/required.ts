@@ -10,5 +10,9 @@ export async function requiredValidator(rule: RequiredValidationRule, value: str
         throw new Error(message)
     }
 
+    if(typeof value === 'string' && value == ""){
+      throw new Error(message)
+    }
+
     return
 }
