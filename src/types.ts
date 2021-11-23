@@ -31,7 +31,7 @@ export const NullableRule = 'nullable' as const
 export type NullableValidationRule = typeof NullableRule
 
 export const CustomRule = 'custom' as const
-export type CustomValidationRule = RuleWithMessage<typeof CustomRule, {rule: ((value: string) => Promise<boolean>)}>
+export type CustomValidationRule = RuleWithMessage<typeof CustomRule, {rule: ((value: string, request: any) => Promise<boolean>)}>
 
 export type ValidationRules = RequiredValidationRule | StringValidationRule | MinValidationRule | MaxValidationRule | BooleanValidationRule | EmailValidationRule | DateValidationRule | NullableValidationRule | NumberValidationRule | CustomValidationRule
 
@@ -40,4 +40,4 @@ export type ValidationSchema = {
 }
 
 export type PromiseResult = undefined | { bail?: boolean }
-export type RulesMethod = (rule: ValidationRules, value: any) => Promise<PromiseResult>
+export type RulesMethod = (rule: ValidationRules, value: any, data: Record<string, any>) => Promise<PromiseResult>

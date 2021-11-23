@@ -47,7 +47,7 @@ const makeValidationMiddleware = (field: FieldTypes, validationRules: Validation
                 }
 
                 try {
-                    const result = await factoryMethod(rule, fieldResult)
+                    const result = await factoryMethod(rule, fieldResult, request)
                     if(result?.bail){
                         break
                     }
