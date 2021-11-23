@@ -1,5 +1,5 @@
 import {
-    BooleanRule, DateRule, EmailRule,
+    BooleanRule, CustomRule, DateRule, EmailRule,
     FieldTypes, MaxRule, MinRule,
     NullableRule, NumberRule,
     RequiredRule,
@@ -16,6 +16,7 @@ import {dateValidator} from "./validators/date";
 import {emailValidator} from "./validators/email";
 import {numberValidator} from "./validators/number";
 import {stringValidator} from "./validators/string";
+import { customValidator } from "./validators/custom";
 
 const rulesFactory: Record<string, RulesMethod> = {
     [RequiredRule]: requiredValidator,
@@ -26,7 +27,8 @@ const rulesFactory: Record<string, RulesMethod> = {
     [DateRule]: dateValidator,
     [EmailRule]: emailValidator,
     [NumberRule]: numberValidator,
-    [StringRule]: stringValidator
+    [StringRule]: stringValidator,
+    [CustomRule]: customValidator
 }
 
 const makeValidationMiddleware = (field: FieldTypes, validationRules: ValidationSchema) => {

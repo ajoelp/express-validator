@@ -26,4 +26,47 @@ describe('middleware', () => {
             willValidateNullableBoolean: expect.any(String)
         })
     })
+
+    describe('custom', () => {
+        it('will pass with custom rule', async () => {
+          const middleware = query({
+            'email': ['required', { type: 'custom', rule: () => Promise.resolve(true) }]
+          })
+
+          const request: any = {
+            query: {
+              email: 'test@example.com'
+            }
+          }
+
+          const nextFunction = jest.fn();
+
+          await middleware(request, {}, nextFunction)
+
+          expect(nextFunction).toHaveBeenCalledTimes(1);
+          expect(request.messageBag).toEqual({});
+        })
+
+        it('will fail with custom rule', async () => {
+          const message = 'This is a custom error message';
+          const middleware = query({
+            'email': ['required', { type: 'custom', rule: () => Promise.resolve(false), message }]
+          })
+
+          const request: any = {
+            query: {
+              email: 'test@example.com'
+            }
+          }
+
+          const nextFunction = jest.fn();
+
+          await middleware(request, {}, nextFunction)
+
+          expect(nextFunction).toHaveBeenCalledTimes(1);
+          expect(request.messageBag).toEqual({
+            email: message
+          });
+        })
+    })
 })

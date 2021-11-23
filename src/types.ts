@@ -30,7 +30,10 @@ export type DateValidationRule = Rule<typeof DateRule>
 export const NullableRule = 'nullable' as const
 export type NullableValidationRule = typeof NullableRule
 
-export type ValidationRules = RequiredValidationRule | StringValidationRule | MinValidationRule | MaxValidationRule | BooleanValidationRule | EmailValidationRule | DateValidationRule | NullableValidationRule | NumberValidationRule
+export const CustomRule = 'custom' as const
+export type CustomValidationRule = RuleWithMessage<typeof CustomRule, {rule: ((value: string) => Promise<boolean>)}>
+
+export type ValidationRules = RequiredValidationRule | StringValidationRule | MinValidationRule | MaxValidationRule | BooleanValidationRule | EmailValidationRule | DateValidationRule | NullableValidationRule | NumberValidationRule | CustomValidationRule
 
 export type ValidationSchema = {
     [key: string]: ValidationRules[]
