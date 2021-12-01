@@ -29,7 +29,7 @@ app.get(
         }),
         body({
             'email': ['required', 'email'],
-            'password': ['required', 'string'],
+            'password': ['required', { type: 'string', message: 'This needs to be a string'}],
         }),
         validationResponseMiddleware,
         (req, res) => res.send()
